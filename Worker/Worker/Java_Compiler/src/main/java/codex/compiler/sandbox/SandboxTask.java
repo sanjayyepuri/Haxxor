@@ -19,7 +19,6 @@ public class SandboxTask {
     final OutputStream out;
 
     public SandboxTask(String src) {
-        super();
         out = new ByteArrayOutputStream();
         if (!javapath) {
             throw new IllegalStateException("No java path set! Files will not compile!");
