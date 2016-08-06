@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class Worker {
 
-  private static final String TASK_QUEUE_NAME = "The Workerz Queue";
+  private static final String TASK_QUEUE_NAME = "work queue";
 
   public static void main(String[] argv) throws Exception {
     ConnectionFactory factory = new ConnectionFactory();
@@ -48,7 +48,7 @@ public class Worker {
     for (char ch : task.toCharArray()) {
       if (ch == '.') {
         try {
-          Thread.sleep(1000);
+          Thread.sleep(1000); //send to judge
         } catch (InterruptedException _ignored) {
           Thread.currentThread().interrupt();
         }
