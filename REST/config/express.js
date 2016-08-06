@@ -58,4 +58,7 @@ module.exports = function(app, config) {
       });
   });
 
+  //Routes
+  require('../app/routes/routes')(app);
+
 };
