@@ -3,17 +3,23 @@
 //   of the root project.
 
 // NetBeans will automatically add "run" and "debug" tasks relying on the
-// "mainClass" property. You may however define the property prior executing
+// "mReceainClass" property. You may however define the property prior executing
 // tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
 //
 // Note however, that you may define your own "run" and "debug" task if you
 // prefer. In this case NetBeans will not add these tasks but you may rely on
 // your own implementation.
+apply plugin:'java'
+
 if (!hasProperty('mainClass')) {
-    ext.mainClass = ''
+    ext.mainClass = 'Rece'
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
+    
+    compile 'com.rabbitmq:amqp-client:3.6.2'
+
     // TODO: Add dependencies here
     //   but note that JUnit should have already been added in parent.gradle.
     //   By default, only the Maven Central Repository is specified in
