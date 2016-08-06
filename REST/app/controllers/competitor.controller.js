@@ -1,11 +1,11 @@
-var Competitor = require('../models/competitor.model.js');
-var User = require('../models/user.model.js');
+var Competitor = require('../models/competitor.model');
+var User = require('../models/user.model');
 
 
 exports.createCompetitor = function (req, res){
     var competitor = new Competitor({
         username: req.body.username,
-        elo: req.body.elo,
+        elo: 1200,
         league: 'unranked',
         matches: [],
     });
@@ -13,7 +13,9 @@ exports.createCompetitor = function (req, res){
     competitor.save(function (err) {
         if(err)
             res.send(err);
-        var user = new User();
-        
-    })
+        res.json({
+            success: true,
+            message: 'Competitor successfully created'
+        });
+    });
 }
