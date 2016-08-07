@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public class CompileTaskReceiver {
 
-    final static String QUEUE_NAME = "sanjayneedstocomeupwithafreakingqueuename";
+    final static String QUEUE_NAME = "worker_queue";
 
     final private Set<CompileTaskListener> listeners;
 
@@ -78,5 +78,8 @@ public class CompileTaskReceiver {
 
         String submission;
         String input;
+        String output;
+        String namespace;
+        
     }
 }
