@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public class CompileTaskReceiver {
 
-    final static String QUEUE_NAME = "worker_queue";
+    final static String QUEUE_NAME = "task_queue";
 
     final private Set<CompileTaskListener> listeners;
 
@@ -39,12 +39,13 @@ public class CompileTaskReceiver {
         gson = new Gson();
 
         ConnectionFactory factory = new ConnectionFactory();
+        System.out.println("ANCHOR: "+server);
         factory.setHost(server);
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-//        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         Consumer consumer = new DefaultConsumer(channel) {
             @Override
@@ -52,12 +53,10 @@ public class CompileTaskReceiver {
                     throws IOException {
                 String message = new String(body, "UTF-8");
                 System.out.println(" [x] Received '" + message + "'");
-
                 CompileTask task = gson.fromJson(message, CompileTask.class);
                 for (CompileTaskListener listener : listeners) {
                     listener.taskReceived(task);
                 }
-
             }
         };
         channel.basicConsume(QUEUE_NAME, true, consumer);
@@ -80,6 +79,7 @@ public class CompileTaskReceiver {
         String input;
         String output;
         String namespace;
-        
+        String client;
+
     }
 }

@@ -12,7 +12,7 @@
 apply plugin:'java'
 
 if (!hasProperty('mainClass')) {
-    ext.mainClass = 'Rece'
+    ext.mainClass = 'haxxor.queue.Main'
 }
 
 dependencies {

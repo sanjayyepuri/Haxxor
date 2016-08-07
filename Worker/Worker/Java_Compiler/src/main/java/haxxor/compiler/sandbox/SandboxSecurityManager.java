@@ -64,9 +64,9 @@ public class SandboxSecurityManager extends SecurityManager {
     @Override
     public void checkAccess(Thread t) {
 
-//        if (!(Thread.currentThread() instanceof SandboxTask)) {
-//            return;
-//        }
+        if (!(Thread.currentThread() instanceof SandboxTask)) {
+            return;
+        }
 
         throw new SecurityException(t + " tried to make a thread");
 

@@ -10,9 +10,9 @@
 // prefer. In this case NetBeans will not add these tasks but you may rely on
 // your own implementation.
 if (!hasProperty('mainClass')) {
-    ext.mainClass = 'codex.compiler.main.Main'
+    ext.mainClass = 'haxxor.compiler.main.Main'
 }
-
+apply plugin: 'java'
 dependencies {
     // TODO: Add dependencies here
     //   but note that JUnit should have already been added in parent.gradle.
@@ -22,10 +22,18 @@ dependencies {
     // You can read more about how to add dependency here:
     //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
     
-    compile ('io.socket:socket.io-client:0.7.0') {
-        // excluding org.json which is provided by Android
-        exclude group: 'org.json', module: 'json'
+    compile ('io.socket:socket.io-client:0.7.0')
+    
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+    
+    
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'haxxor.compiler.main.Main'
     }
-    
-    
+    from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

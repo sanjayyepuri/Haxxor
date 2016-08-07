@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class Rece {
 
-  private final static String QUEUE_NAME = "The Best Queue";
+  private final static String QUEUE_NAME = "worker_queue";
 
   public static void main(String[] argv) throws Exception {
     ConnectionFactory factory = new ConnectionFactory();
@@ -22,7 +22,7 @@ public class Rece {
     Connection connection = factory.newConnection();
     Channel channel = connection.createChannel();
 
-    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+    channel.queueDeclare(QUEUE_NAME, true, false, false, null);
     System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
     Consumer consumer = new DefaultConsumer(channel) {

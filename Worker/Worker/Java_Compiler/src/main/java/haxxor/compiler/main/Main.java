@@ -1,5 +1,6 @@
 package haxxor.compiler.main;
 
+import com.google.gson.Gson;
 import haxxor.compiler.sandbox.SandboxSecurityManager;
 import haxxor.compiler.sandbox.SandboxTask;
 import java.io.BufferedInputStream;
@@ -14,11 +15,23 @@ import java.io.PrintStream;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Main {
+    
+    static{
+        try {
+            Class.forName("io.socket.client.IO");
+        } catch (ClassNotFoundException ex) {
+            
+        }
+    }
 
     public static void main(String[] args) {
-        
-        String user = System.getenv("client") == null ? "" : System.getenv("source");
+        System.out.println("hello world");
+        String user = System.getenv("client") == null ? "" : System.getenv("client");
         String source = System.getenv("source") == null ? "" : System.getenv("source");
         String input = System.getenv("input") == null ? "" : System.getenv("input");
         String output = System.getenv("output") == null ? "" : System.getenv("output");
@@ -53,13 +66,31 @@ public class Main {
         
         //send that stuff yo'
         try {
+            
             Socket socket = IO.socket("http://localhost:3000/"+namespace);
-            String result = String.format("{user: %s, result:%s}",user , success?"true":"false");
-            socket.emit("program_result", result);
+            socket = socket.connect();
+            og.println(socket.connected());
+            
+            Result result = new Result();
+            result.user = user;
+            result.success = success?"true":"false";
+            
+            Gson gson = new Gson();
+            String harambe = gson.toJson(result);
+            socket.emit("program_result", harambe); // RIP
+            Thread.sleep(2000);
+            //socket.disconnect();
+            //System.exit(6969);
         } catch(Exception e){
+            
             e.printStackTrace();
         }
         og.println(out);
+    }
+    
+    public static class Result{
+        String user;
+        String success;
     }
 
 }
