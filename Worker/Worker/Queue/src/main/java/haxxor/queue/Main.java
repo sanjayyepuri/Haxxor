@@ -3,8 +3,6 @@ package haxxor.queue;
 import java.io.IOException;
 import static java.lang.System.out;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -36,7 +34,8 @@ public class Main {
             
             builder.environment().put("source", task.submission);
             builder.environment().put("input", task.input);
-            builder.environment().put("serverinfostuff", null);
+            builder.environment().put("namespace", task.namespace);
+            builder.environment().put("output", task.output);
             try {
                 builder.start();
             } catch (IOException ex) {

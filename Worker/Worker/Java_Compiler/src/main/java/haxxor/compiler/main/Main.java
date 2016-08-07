@@ -11,24 +11,29 @@ import java.io.PrintStream;
  *
  * @author Nathan Dias {@literal <nathanxyzdias@gmail.com>}
  */
+import io.socket.client.IO;
+import io.socket.client.Socket;
+
 public class Main {
 
     public static void main(String[] args) {
-
-        String source = System.getenv("source");
+        
+        String user = System.getenv("client") == null ? "" : System.getenv("source");
+        String source = System.getenv("source") == null ? "" : System.getenv("source");
         String input = System.getenv("input") == null ? "" : System.getenv("input");
-        String serverinfostuff = System.getenv("serverinfostuff");
-
-        source = "public class foo{public static void main(String[] args){System.out.println(\"Yu Jingze\");}}";
+        String output = System.getenv("output") == null ? "" : System.getenv("output");
+        String namespace = System.getenv("namespace") == null ? "" : System.getenv("namespace");
+        
+//        source = "public class foo{public static void main(String[] args){System.out.println(\"Yu Jingze\");}}";
 
         SandboxTask task = new SandboxTask(source);
 
         System.setIn(new BufferedInputStream(new ByteArrayInputStream(input.getBytes())));
 
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        ByteArrayOutputStream outputstr = new ByteArrayOutputStream();
 
         PrintStream og = System.out;
-        System.setOut(new PrintStream(output));
+        System.setOut(new PrintStream(outputstr));
 
         System.setSecurityManager(new SandboxSecurityManager());
 
@@ -42,9 +47,18 @@ public class Main {
         }
         task.stop();
 
-        String out = output.toString();
+        String out = outputstr.toString();
+        
+        boolean success = out.equals(output);
         
         //send that stuff yo'
+        try {
+            Socket socket = IO.socket("http://localhost:3000/"+namespace);
+            String result = String.format("{user: %s, result:%s}",user , success?"true":"false");
+            socket.emit("program_result", result);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
         og.println(out);
     }
 
