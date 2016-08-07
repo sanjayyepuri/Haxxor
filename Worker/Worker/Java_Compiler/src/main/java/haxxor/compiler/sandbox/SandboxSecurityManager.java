@@ -1,4 +1,4 @@
-package codex.compiler.sandbox;
+package haxxor.compiler.sandbox;
 
 import java.io.FilePermission;
 import java.security.Permission;

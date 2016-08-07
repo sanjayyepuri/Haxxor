@@ -1,7 +1,7 @@
-package codex.compiler.main;
+package haxxor.compiler.main;
 
-import codex.compiler.sandbox.SandboxSecurityManager;
-import codex.compiler.sandbox.SandboxTask;
+import haxxor.compiler.sandbox.SandboxSecurityManager;
+import haxxor.compiler.sandbox.SandboxTask;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -17,6 +17,7 @@ public class Main {
 
         String source = System.getenv("source");
         String input = System.getenv("input") == null ? "" : System.getenv("input");
+        String serverinfostuff = System.getenv("serverinfostuff");
 
         source = "public class foo{public static void main(String[] args){System.out.println(\"Yu Jingze\");}}";
 

@@ -17,14 +17,9 @@ if (!hasProperty('mainClass')) {
 
 dependencies {
     // https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
-    
     compile 'com.rabbitmq:amqp-client:3.6.2'
+    
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
 
-    // TODO: Add dependencies here
-    //   but note that JUnit should have already been added in parent.gradle.
-    //   By default, only the Maven Central Repository is specified in
-    //   parent.gradle.
-    //
-    // You can read more about how to add dependency here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
 }
