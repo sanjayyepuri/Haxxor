@@ -10,16 +10,14 @@ import org.mdkt.compiler.InMemoryJavaCompiler;
  *
  * @author Nathan Dias {@literal <nathanxyzdias@gmail.com>}
  */
-public class SandboxTask {
+public class SandboxTask extends Thread {
 
     private Method main;
     boolean error = false;
     private static boolean javapath = ToolProvider.getSystemJavaCompiler() != null;
 
-    final OutputStream out;
-
     public SandboxTask(String src) {
-        out = new ByteArrayOutputStream();
+        super();
         if (!javapath) {
             throw new IllegalStateException("No java path set! Files will not compile!");
         }
@@ -81,6 +79,9 @@ public class SandboxTask {
         }
         try {
             main.invoke(null, (Object) null);
+            synchronized (this) {
+                this.notifyAll();
+            }
         } catch (Exception e) {
             error = true;
             e.printStackTrace(System.out);

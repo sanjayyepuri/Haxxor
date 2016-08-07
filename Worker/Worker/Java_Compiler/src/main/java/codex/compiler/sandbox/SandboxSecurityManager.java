@@ -24,9 +24,9 @@ public class SandboxSecurityManager extends SecurityManager {
     public void checkPermission(Permission perm) {
 //        System.err.println(Arrays.toString(Thread.currentThread().getStackTrace()));
 
-//        if (!(Thread.currentThread() instanceof SandboxTask)) {
-//            return;
-//        }
+        if (!(Thread.currentThread() instanceof SandboxTask)) {
+            return;
+        }
 //        System.err.println(perm.getName());
 
         if (perm instanceof FilePermission) {
