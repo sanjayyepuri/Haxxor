@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1(class="title") Haxxor
+  h2(id="competitor")= title
+  div(class="container")
+    p(id="message") Welcome #{title}
+    h3(id="round")
+    p(id="problem")
+    form(id='file', method="post", enctype="multipart/form-data")
+      input(type="file", name="program")
+      input(type="submit")
+    script.
+      document.getElementById('file').action = window.location.href + '/upload'

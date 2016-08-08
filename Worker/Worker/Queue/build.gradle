@@ -1,0 +1,25 @@
+// Note: "common.gradle" in the root project contains additional initialization
+//   for this project. This initialization is applied in the "build.gradle"
+//   of the root project.
+
+// NetBeans will automatically add "run" and "debug" tasks relying on the
+// "mReceainClass" property. You may however define the property prior executing
+// tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
+//
+// Note however, that you may define your own "run" and "debug" task if you
+// prefer. In this case NetBeans will not add these tasks but you may rely on
+// your own implementation.
+apply plugin:'java'
+
+if (!hasProperty('mainClass')) {
+    ext.mainClass = 'haxxor.queue.Main'
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.rabbitmq/amqp-client
+    compile 'com.rabbitmq:amqp-client:3.6.2'
+    
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+
+}
