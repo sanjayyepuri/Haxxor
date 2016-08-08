@@ -141,5 +141,4 @@ function getWinner(competitors){
 
   return winner;
 }
-
 module.exports = app;

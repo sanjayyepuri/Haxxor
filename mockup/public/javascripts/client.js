@@ -53,6 +53,16 @@ var problem = [
     "Print the concatenated form of two strings on each line of the input"
 ]
 
+
+
+var programs = [
+    "public class Foo{public static void main(String[] args){System.out.println(\"Hello World!\");}}",
+    "public class Foo{public static void main(String[] args){int i = 0;for(int x=1;x<=100;x++){i+=x;}System.out.println(i);}}",
+    "public class Foo{public static void main(String[] args){Scanner yo = new Scanner(System.in);while(yo.hasNextInt()){System.out.println(yo.nextInt()*yo.nextInt());}}}",
+    "public class Foo{public static void main(String[] args){Scanner yo = new Scanner(System.in);while(yo.hasNextLine()){System.out.println(yo.nextLine().replaceAll(\" \",\"\"););}}}"
+
+]
+
 $(document).ready(function() { 
     var lobby = io('http://localhost:3000/random-guid');
     var client_name = $("#competitor").text();

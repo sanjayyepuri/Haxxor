@@ -18,6 +18,20 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
+var input = [
+    '',
+    'cabbage\npoop\nfood',
+    '',
+    '5 6\n4 3\n9 9',
+    'dog cat\nword odd\ndeer bear'
+]
+var out = [
+    'Hello World\n',
+    'I love cabbage\nI love poop\nI love food\n',
+    '5050\n',
+    '30\n12\n81\n',
+    'dogcat\nwordodd\ndeerbear\n'
+]
 
 /* GET home page. */
 router.get('/user/:competitor', function(req, res, next) {
